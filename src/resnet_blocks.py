@@ -84,9 +84,9 @@ class SecondLayer(tf.keras.layers.Layer):
         out = self.second_identity(x)
         return out
 
-class thirdLayer(tf.keras.layers.Layer):
+class ThirdLayer(tf.keras.layers.Layer):
     def __init__(self):
-        super(thirdLayer, self).__init__()
+        super(ThirdLayer, self).__init__()
         self.convolutional_block = ConvolutionalBlock(128)
         self.first_identity = IdentityBlock(128)
         self.second_identity = IdentityBlock(128)
