@@ -2,7 +2,6 @@ import tensorflow as tf
 class MutexAttentionBlock(tf.keras.layers.Layer):
     def __init__(self, ):
         super(MutexAttentionBlock, self).__init__()
-    
     def call(self, x, y):
         z = tf.square(tf.subtract(x, y))
         z = tf.reshape(z, shape=(-1, x.shape[-1]))
