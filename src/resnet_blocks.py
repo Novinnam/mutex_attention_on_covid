@@ -1,15 +1,15 @@
 import tensorflow as tf
 
 class ConvolutionalBlock(tf.keras.layers.Layer):
-    def __init__(self, filters):
+    def __init__(self, filters, strides=2):
         super(ConvolutionalBlock, self).__init__()
-        self.first_conv = tf.keras.layers.Conv2D(filters, (1, 1), strides = 2)
+        self.first_conv = tf.keras.layers.Conv2D(filters, (1, 1), strides = strides)
         self.first_batch_norm = tf.keras.layers.BatchNormalization(axis=-1)
         self.second_conv = tf.keras.layers.Conv2D(filters, (3, 3), padding='same')
         self.second_batch_norm = tf.keras.layers.BatchNormalization(axis=-1)
         self.third_conv = tf.keras.layers.Conv2D(filters * 4, (1, 1))
         self.third_batch_norm = tf.keras.layers.BatchNormalization(axis=-1)
-        self.skip_conv = tf.keras.layers.Conv2D(filters * 4, (1, 1), strides=2)
+        self.skip_conv = tf.keras.layers.Conv2D(filters * 4, (1, 1), strides = strides)
         self.skip_batch_norm = tf.keras.layers.BatchNormalization(axis=-1)
     
     def call(self, inputs):
@@ -74,7 +74,7 @@ class FirstLayer(tf.keras.layers.Layer):
 class SecondLayer(tf.keras.layers.Layer):
     def __init__(self):
         super(SecondLayer, self).__init__()
-        self.convolutional_block = ConvolutionalBlock(64)
+        self.convolutional_block = ConvolutionalBlock(64, strides=1)
         self.first_identity = IdentityBlock(64)
         self.second_identity = IdentityBlock(64)
 
