@@ -67,8 +67,8 @@ class FirstLayer(tf.keras.layers.Layer):
     def call(self, inputs):
         x = self.conv(inputs)
         x = self.batch_norm(x)
-        x = tf.nn.relu(x)
-        out = self.max_pool(x)
+        x = self.max_pool(x)
+        out = tf.nn.relu(x)
         return out
 
 class SecondLayer(tf.keras.layers.Layer):
