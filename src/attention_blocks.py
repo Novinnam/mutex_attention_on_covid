@@ -42,10 +42,10 @@ class FuseAttentionBlock(tf.keras.layers.Layer):
         m = self.m_third_dense(z)
         n = self.n_third_dense(z)
 
-        concated = tf.concat([m, n], axis=-1)
+        concated = tf.concat([m, n], axis=0)
 
         a_c = tf.nn.softmax(concated)
 
         out = tf.add(tf.multiply(a_c, f_am), 
-                     tf.multiply((1 - a_c), f_am))
+                     tf.multiply((1 - a_c), y))
         return out
