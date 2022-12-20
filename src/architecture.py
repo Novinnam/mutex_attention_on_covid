@@ -4,6 +4,7 @@ from resnet_blocks import FirstLayer, SecondLayer, ThirdLayer, FourthLayer, Fift
 
 class MutexAttentionResModel(tf.keras.Model):
     def __init__(self, units):
+        super(MutexAttentionResModel, self).__init__()
         self.first_layer = FirstLayer()
         self.first_mutex = MutexAttentionBlock()
         self.first_fusion = FuseAttentionBlock(64)
