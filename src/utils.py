@@ -24,8 +24,8 @@ class AdaptiveLoss(tf.losses.Loss):
         
         denominator = tf.reduce_sum([exp_ce, exp_cs])
 
-        a_1 = tf.math.divide(exp_ce, denominator)
-        a_2 = tf.math.subtract(1.0, a_1)
+        a_1 = tf.divide(exp_ce, denominator)
+        a_2 = tf.subtract(1.0, a_1)
         # loss -> 0 and a_1 -> inf so for avoid of inf a_1
         if tf.math.is_nan(a_1):
             a_1 = 1.0
