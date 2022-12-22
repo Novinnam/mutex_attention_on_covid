@@ -19,9 +19,9 @@ class AdaptiveLoss(tf.losses.Loss):
         cross_entropy_loss = self.cross_entropy(input_y_true, input_y_pred, mutex_y_true, mutex_y_pred)
         cosine_loss = -1 * self.cosine_similarity(v_i, v_m)
 
-        exp_ce = tf.math.exp(tf.math.divide(1.0, cross_entropy_loss))
-        exp_cs = tf.math.exp(tf.math.divide(1.0, cosine_loss))
-
+        exp_ce = tf.exp(tf.divide(1.0, cross_entropy_loss))
+        exp_cs = tf.exp(tf.divide(1.0, cosine_loss))
+        
         denominator = tf.reduce_sum([exp_ce, exp_cs])
 
         a_1 = tf.math.divide(exp_ce, denominator)
@@ -31,6 +31,6 @@ class AdaptiveLoss(tf.losses.Loss):
             a_1 = 1.0
             a_2 = 0.0
 
-        multiply_1 = tf.math.multiply(a_1, cross_entropy_loss)
-        multiply_2 = tf.math.multiply(a_2, cosine_loss)
+        multiply_1 = tf.multiply(a_1, cross_entropy_loss)
+        multiply_2 = tf.multiply(a_2, cosine_loss)
         return tf.reduce_sum([multiply_1, multiply_2])
