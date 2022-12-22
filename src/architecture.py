@@ -55,6 +55,6 @@ class MutexAttentionResModel(tf.keras.Model):
         x = self.global_avg_pool(x)
         y = self.global_avg_pool(y)
 
-        first_out = self.last_dense(x)
-        second_out = self.last_dense(y)
-        return first_out, second_out, v_i, v_m
+        input_y_pred = self.last_dense(x)
+        mutex_y_pred = self.last_dense(y)
+        return input_y_pred, mutex_y_pred, v_i, v_m
