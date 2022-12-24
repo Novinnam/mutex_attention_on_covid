@@ -3,7 +3,7 @@ from attention_blocks import MutexAttentionBlock, FuseAttentionBlock
 from resnet_blocks import FirstLayer, SecondLayer, ThirdLayer, FourthLayer, FifthLayer
 
 class MutexAttentionResModel(tf.keras.Model):
-    def __init__(self, units):
+    def __init__(self, num_classes):
         super(MutexAttentionResModel, self).__init__()
         self.first_layer = FirstLayer()
         self.first_mutex = MutexAttentionBlock()
@@ -21,7 +21,7 @@ class MutexAttentionResModel(tf.keras.Model):
         self.fifth_mutex = MutexAttentionBlock()
         self.fifth_fusion = FuseAttentionBlock(2048)
         self.global_avg_pool = tf.keras.layers.GlobalAveragePooling2D()
-        self.last_dense = tf.keras.layers.Dense(units, activation='softmax')
+        self.last_dense = tf.keras.layers.Dense(num_classes, activation='softmax')
     
     def call(self, x, y):
         x = self.first_layer(x)
