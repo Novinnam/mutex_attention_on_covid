@@ -34,3 +34,4 @@ class AdaptiveLoss(tf.losses.Loss):
         multiply_1 = tf.multiply(a_1, cross_entropy_loss)
         multiply_2 = tf.multiply(a_2, cosine_loss)
         return tf.reduce_sum([multiply_1, multiply_2])
+
